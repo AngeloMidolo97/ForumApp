@@ -1,0 +1,31 @@
+<h1 class="text-center m-3">CREA UN POST</h1>
+<div class="register container-fluid d-flex justify-content-center">
+  <form class="form" #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <mdb-form-control>
+      <input mdbInput type="text" id="form1" class="form-control mt-2" title="" required ngModel name="title" />
+      <label mdbLabel class="form-label" for="form1">Titolo del post</label>
+    </mdb-form-control>
+    <mdb-form-control>
+      <input mdbInput type="text" id="form1" class="form-control mt-2" descrizione required ngModel
+        name="descrizione" />
+      <label mdbLabel class="form-label" for="form1">Descrizione del post</label>
+    </mdb-form-control>
+    <mdb-form-control>
+      <input mdbInput type="text" id="form1" class="form-control mt-2" imgUrl ngModel name="imgUrl" />
+      <label mdbLabel class="form-label" for="form1">Url Immagine</label>
+    </mdb-form-control>
+    <div class="form-floating mt-2">
+      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" categoria ngModel name="categoria">
+        <option selected>Open this select menu</option>
+        <option value="HARDWARE">HARDWARE</option>
+        <option value="VIDEOGAME">VIDEOGAME</option>
+        <option value="SOFTWARE">SOFTWARE</option>
+        <option value="SMARTPHONE">SMARTPHONE</option>
+        <option value="CODING">CODING</option>
+        <option value="CRYPTO">CRYPTO</option>
+      </select>
+      <label for="floatingSelect">Categoria</label>
+    </div>
+    <button class="btn btn-primary mt-2 w-100" type="submit">CREA POST</button>
+  </form>
+</div>

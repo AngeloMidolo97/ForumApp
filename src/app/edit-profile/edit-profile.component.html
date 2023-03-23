@@ -1,0 +1,16 @@
+<h1 class="text-center m-3">AGGIORNA IL TUO PROFILO</h1>
+<p class="text-center">Aggiungi una biografia che ti descriva</p>
+<p class="text-center">Imposta un immagine del profilo</p>
+<div class="register container-fluid d-flex justify-content-center align-items-center">
+  <form class="form" #form = "ngForm" (ngSubmit)="onSubmit(form)">
+    <mdb-form-control>
+      <input mdbInput type="text" id="form1" class="form-control mt-2" bio ngModel name="bio" />
+      <label mdbLabel class="form-label" for="form1">Biografia</label>
+    </mdb-form-control>
+    <mdb-form-control>
+      <input mdbInput type="text" id="form1" class="form-control mt-2" imgUrl ngModel name="imgUrl" />
+      <label mdbLabel class="form-label" for="form1">Url immagine profilo</label>
+    </mdb-form-control>
+    <button class="btn btn-primary mt-2 w-100" type="submit">Update</button>
+  </form>
+</div>

@@ -1,0 +1,40 @@
+<div class="container p-3">
+
+  <div class="container-fluid bg-dark p-3 rounded mb-3">
+    <form class="d-flex input-group w-auto" #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" search required ngModel name="search" />
+      <button class="input-group-text text-white border-0" type="submit" id="search-addon">
+        <i class="fas fa-search"></i>
+      </button>
+      <button class="input-group-text text-white border-0" routerLink="/addPost">
+        <i class="fas fa-add"></i>
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="posts.length == 0" class="alert alert-primary" role="alert">
+    Non ci sono risultati per questa ricerca!
+  </div>
+
+  <div class="card mb-3" *ngFor="let item of posts">
+    <div class="card-header">{{item.title}}</div>
+    <div class="card-body">
+      <div class="blockquote mb-0">
+        <p>{{item.descrizione}}</p>
+        <img src="{{item.imgUrl}}" alt="">
+        <div class="d-flex justify-content-between">
+          <cite title="Source Title">
+            <p>Categoria: {{item.categoria}}</p>
+            <a [routerLink]="['/profile/', item.user.id]">{{item.user.username}}</a>
+          </cite>
+          <div>
+            <button class="btn btn-primary me-2" [routerLink]="['/post/', item.id]"><i
+                class="fa-regular fa-paper-plane"></i></button>
+            <button class="btn btn-primary" [routerLink]="['/post/', item.id]"><i
+                class="fa-solid fa-up-right-from-square"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

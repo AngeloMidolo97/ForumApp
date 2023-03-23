@@ -1,0 +1,213 @@
+<!-- <div class="container rounded-3 p-3 main">
+  <div class="row">
+    <div class="col-md-3 border-end">
+
+
+      <div class="card-body" *ngIf="post">
+        <div class="d-flex align-items-start media">
+          <img *ngIf="!post.user.imgUrl" src="https://bootdey.com/img/Content/avatar/avatar1.png"
+            class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+          <img *ngIf="post.user.imgUrl" src="{{post.user.imgUrl}}" class="rounded-circle avatar-lg img-thumbnail"
+            alt="profile-image">
+          <div class="w-100 ms-3" >
+            <h4 class="my-0">{{post.user.fullname}}</h4>
+            <p class="text-muted">@{{post.user.username}}</p>
+          </div>
+        </div>
+
+        <div class="mt-3" *ngIf="post.user">
+          <h4 class="font-13 text-uppercase">About Me :</h4>
+          <p class="text-muted font-13 mb-3">
+            {{post.user.bio}}
+          </p>
+          <p class="text-muted mb-2 font-13"><strong>Full Name :</strong> <span
+              class="ms-2">{{post.user.fullname}}</span></p>
+
+          <p class="text-muted mb-2 font-13"><strong>Mobile :</strong><span class="ms-2">(123) 123 1234</span></p>
+
+          <p class="text-muted mb-2 font-13"><strong>Email :</strong> <span class="ms-2">{{post.user.email}}</span></p>
+
+          <p class="text-muted mb-1 font-13"><strong>Location :</strong> <span class="ms-2">USA</span></p>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-md-9 mt-3 p-3 d-flex flex-column justify-content-center h-100 bg-gray rounded-2 text-light">
+      <div *ngIf="post">
+        <div class="d-flex justify-content-between" >
+          <h1 class="text-start">{{post.title}}</h1>
+          <div class="d-flex align-items-baseline">
+            <p class="me-2 fs-3">{{post.miPiace}}</p>
+            <button class="btn btn-primary me-2" (click)="like()"><i class="fa-regular fa-heart"></i></button>
+            <button *ngIf="checkLogged()" class="btn btn-danger" (click)="deletePost()"><i class="fa-sharp fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+        <p>Piace a: <a [routerLink]="['/profile/', item.id]" *ngFor="let item of likes">{{item.username}} </a> </p>
+        <h4 >{{post.descrizione}}</h4>
+        <p >Pubblicato il: {{post.dataPubb}}</p>
+        <div class="d-flex flex-column align-items-center">
+          <img  class="img-fluid" src="{{post.imgUrl}}" alt="">
+        </div>
+      </div>
+
+      <h3 class="text-center mt-3">QUI SOTTO TROVI LE RISPOSTE A QUESTO POST</h3>
+
+
+      <div class="card mt-3" *ngFor="let item of risposta">
+        <a class="card-header d-flex justify-content-between">
+          <div *ngIf="item">
+            <img src="{{item.user.imgUrl}}" class="rounded-circle me-2" height="22" alt="" loading="lazy" />
+            <a [routerLink]="['/profile/', item.user.id]">{{item.user.username}}</a>
+          </div>
+          <p class="text-dark">{{item.dataPubb}}</p>
+        </a>
+        <div class="card-body">
+          <h5 class="card-title text-dark">{{item.title}}</h5>
+          <p class="card-text text-dark">{{item.risposta}}</p>
+        </div>
+      </div>
+
+      <div class="rispondi d-flex flex-column align-items-center">
+
+        <h2 class="text-center my-3">RISPONDI</h2>
+
+        <form class="bg-muted p-3 w-100 rounded-2" #form="ngForm" (ngSubmit)="onSubmit(form)">
+          <mdb-form-control>
+            <input mdbInput type="text" id="form1" class="form-control mt-2 bg-light" title required ngModel
+              name="title" />
+            <label mdbLabel class="form-label" for="form1">Titolo</label>
+          </mdb-form-control>
+          <mdb-form-control>
+            <textarea mdbInput class="form-control bg-light mt-2" id="textAreaExample" rows="4" risposta required
+              ngModel name="risposta"></textarea>
+            <label mdbLabel class="form-label" for="textAreaExample">Risposta</label>
+          </mdb-form-control>
+          <button class="btn btn-primary mt-2 w-100" type="submit">Rispondi</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row ">
+
+      <!-- Left side -->
+      <div class="col-md-2 border-gray p-3">
+        <a routerLink="/home">Home</a>
+        <hr>
+        <strong>Public</strong>
+
+        <div class="list-group list-group-light">
+          <a class="list-group-item list-group-item-action px-3 border-0" routerLink="/forum">Questions</a>
+          <a class="list-group-item list-group-item-action px-3 border-0">Categories</a>
+          <a class="list-group-item list-group-item-action px-3 border-0">Users</a>
+        </div>
+
+        <hr>
+
+        <p>Community</p>
+        <div class="border border-dark p-2">
+          <strong>Join the Community</strong>
+          <p>Start collaborating and sharing with our community.</p>
+          <img class="img-fluid" src="../../assets/community3.svg" alt="">
+          <button class="btn button mt-2 text-light" routerLink="/register">Create a free account</button>
+        </div>
+
+      </div>
+
+      <!-- Main content -->
+      <div class="col-md-8 footer p-3">
+        <div>
+          <h1>{{post.title}}</h1>
+
+          <div class="d-flex justify-content-between">
+            <div>
+              <span><strong>Asked: </strong>{{post.dataPubb}}, </span>
+              <span><strong> Likes: </strong>{{post.miPiace}}</span>
+            </div>
+            <div>
+              <a [routerLink]="['/profile/', post.user.id]">{{post.user.username}}</a>
+            </div>
+          </div>
+
+          <hr>
+
+          <div>
+            <p>{{post.descrizione}}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="badge badge-primary">{{post.categoria}}</p>
+            <div>
+              <button class="btn btn-primary me-2" (click)="like()"><i class="fa-regular fa-heart"></i></button>
+              <button *ngIf="checkLogged()" class="btn btn-danger" (click)="deletePost()"><i class="fa-sharp fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div>
+          <div class="card mt-3" *ngFor="let item of risposta">
+            <a class="card-header d-flex justify-content-between">
+              <div *ngIf="item">
+                <img src="{{item.user.imgUrl}}" class="rounded-circle me-2" height="22" alt="" loading="lazy" />
+                <a [routerLink]="['/profile/', item.user.id]">{{item.user.username}}</a>
+              </div>
+              <p class="text-dark">{{item.dataPubb}}</p>
+            </a>
+            <div class="card-body">
+              <h5 class="card-title text-dark">{{item.title}}</h5>
+              <p class="card-text text-dark">{{item.risposta}}</p>
+            </div>
+          </div>
+
+          <form class="bg-muted p-3 w-100 rounded-2" #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <mdb-form-control>
+              <input mdbInput type="text" id="form1" class="form-control mt-2 bg-light" title required ngModel
+                name="title" />
+              <label mdbLabel class="form-label" for="form1">Titolo</label>
+            </mdb-form-control>
+            <mdb-form-control>
+              <textarea mdbInput class="form-control bg-light mt-2" id="textAreaExample" rows="4" risposta required
+                ngModel name="risposta"></textarea>
+              <label mdbLabel class="form-label" for="textAreaExample">Risposta</label>
+            </mdb-form-control>
+            <button class="btn btn-primary mt-2 w-100" type="submit">Rispondi</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- right side -->
+
+      <div class="col-md-2 border-start-gray p-3">
+        <div>
+          <strong>Top 3 questions</strong>
+
+          <div class="card mb-3" *ngFor="let item of top3">
+            <a class="card-header" [routerLink]="['/post/', item.id]" (click)="getPost2(item.id)">{{item.title}}</a>
+            <p class="cart-item">{{item.descrizione}}</p>
+          </div>
+
+        </div>
+        <hr>
+
+        <div>
+          <strong>Categories</strong>
+          <li class="list-group-item border-0 "><a [routerLink]="['/forum']" class="itemc"> ALL
+              CATEGORIES </a></li>
+          <ul class="list-group lista" *ngFor="let item of categorie">
+            <li class="list-group-item border-0"><a [routerLink]="['/forum/', item]">{{item}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

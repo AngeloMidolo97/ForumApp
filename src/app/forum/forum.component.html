@@ -1,0 +1,328 @@
+<!-- <div class="container-fluid background m-0 p-0">
+
+
+  <div class="container p-0">
+
+    <div class="row gx-4 gx-lg-5 align-items-center py-5">
+      <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0"
+          src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
+      <div class="col-lg-5">
+        <h1 class="font-weight-light">Business Name or Tagline</h1>
+        <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it
+          makes
+          a great use of the standard Bootstrap core components. Feel free to use this template for any project you
+          want!
+        </p>
+        <a class="btn btn-primary" href="#!">Call to Action!</a>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="container p-3">
+    <section class=" pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <h3 class="mb-3">Top 3 Discussion </h3>
+          </div>
+          <div class="col-12">
+            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row">
+
+                    <div class="col-md-4 mb-3" *ngFor="let item of top3">
+                      <div class="card border border-1">
+                        <div class="card-header">
+                          <a [routerLink]="['/categoria/', item.categoria]">{{item.categoria}}</a>
+                        </div>
+                        <img src="{{item?.imgUrl}}" alt="">
+                        <img class="img-fluid" alt="100%x280" *ngIf="!item.imgUrl"
+                          src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=3d2e8a2039c06dd26db977fe6ac6186a">
+                        <div class="card-body">
+                          <h4 class="card-title">{{item.title}}</h4>
+                          <p class="card-text">{{item.descrizione}}</p>
+                          <p class="card-text"><i class="fa-regular fa-heart"></i> {{item.miPiace}}</p>
+                          <div class="d-flex justify-content-between align-items-baseline">
+                            <a class="card-text" [routerLink]="['/profile/', item.user.id]">{{item.user.username}}</a>
+                            <button class="btn btn-primary" [routerLink]="['/post/', item.id]"><i
+                                class="fa-solid fa-up-right-from-square"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-9 mb-3">
+          <div class="container-fluid bg-dark p-3 rounded mb-3">
+            <form class="d-flex input-group w-auto" #form="ngForm" (ngSubmit)="onSubmit(form)">
+              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                aria-describedby="search-addon" search required ngModel name="search" />
+              <button class="input-group-text text-white border-0" type="submit" id="search-addon">
+                <i class="fas fa-search"></i>
+              </button>
+              <button class="input-group-text text-white border-0" routerLink="/addPost">
+                <i class="fas fa-add"></i>
+              </button>
+            </form>
+          </div>
+
+          <div *ngIf="posts.length == 0" class="alert alert-primary" role="alert">
+            Non ci sono risultati per questa ricerca!
+          </div>
+
+
+          <div
+            class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0"
+            *ngFor="let item of posts">
+            <div class="row align-items-center">
+              <div class="col-md-8 mb-3 mb-sm-0">
+                <h5>
+                  <a [routerLink]="['/post/', item.id]" class="text-primary">{{item.title}}</a>
+                </h5>
+                <p class="text-sm"><span class="op-6">Posted on</span> <a class="text-black"> {{item.dataPubb}} </a>
+                  <span class="op-6">by </span> <a [routerLink]="['/profile/', item.user.id]">{{item.user.username}}</a>
+                </p>
+                <div class="text-sm op-5">Categoria: <a class="text-primary mr-2">{{item.categoria}}</a> </div>
+              </div>
+              <div class="col-md-4 op-7">
+                <div class="row text-center op-7">
+                  <div class="col px-1"> <i class="ion-connection-bars icon-1x"></i> <span
+                      class="d-block text-sm">{{item.miPiace}} Likes</span> </div>
+
+                  <div class="col px-1"> <i class="ion-ios-chatboxes-outline icon-1x"></i> <span
+                      class="d-block text-sm">{{item.risposte.length}} Answers</span> </div>
+
+                  <div class="col px-1"> <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm">290
+                      Views</span> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <nav aria-label="..." *ngIf="pageSwitch">
+            <ul class="pagination pagination-lg">
+              <li class="page-item active" aria-current="page" *ngFor="let item of [].constructor(pageData?.totalPages); let i = index">
+                <span class="page-link me-2" (click)="getPosts(i)">
+                  {{i + 1}}
+                  <span class="visually-hidden">(current)</span>
+                </span>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+
+
+        <div class="col-lg-3 mb-4 mb-lg-0 px-lg-0 mt-lg-0">
+          <div
+            style="visibility: hidden; display: none; width: 285px; height: 801px; margin: 0px; float: none; position: static; inset: 85px auto auto;">
+          </div>
+          <div
+            data-settings="{&quot;parent&quot;:&quot;#content&quot;,&quot;mind&quot;:&quot;#header&quot;,&quot;top&quot;:10,&quot;breakpoint&quot;:992}"
+            data-toggle="sticky" class="sticky" style="top: 85px;">
+            <div class="sticky-inner">
+              <a class="btn btn btn-block btn-success rounded py-4 mb-3 bg-op-6 roboto-bold" routerLink="/addPost">Ask
+                Question</a>
+              <div class="bg-white mb-3">
+                <h4 class="px-3 py-4 op-5 m-0">
+                  Category
+                </h4>
+                <hr class="m-0">
+                <div class="pos-relative px-3 py-3">
+                  <h6 class="text-primary text-sm">
+                    <a [routerLink]="['/forum']" (click)="getPosts(0)" class="text-primary"> ALL CATEGORIES </a>
+                  </h6>
+                </div>
+                <div class="pos-relative px-3 py-3" *ngFor="let item of categorie">
+                  <h6 class="text-primary text-sm">
+                    <a [routerLink]="['/forum/', item]" (click)="getPostCategory(item)" class="text-primary"> {{item}}
+                    </a>
+                  </h6>
+                </div>
+              </div>
+              <div class="bg-white text-sm">
+                <h4 class="px-3 py-4 op-5 m-0 roboto-bold">
+                  Stats
+                </h4>
+                <hr class="my-0">
+                <div class="row text-center d-flex flex-row op-7 mx-0">
+                  <div class="col-sm-6 flex-ew text-center py-3 border-bottom border-right"> <a
+                      class="d-block lead font-weight-bold" *ngIf="categorie">{{categorie.length}}</a> Category </div>
+                  <div class="col-sm-6 col flex-ew text-center py-3 border-bottom mx-0"> <a
+                      class="d-block lead font-weight-bold" *ngIf="posts">{{posts.length}}</a> Posts </div>
+                </div>
+                <div class="row d-flex flex-row op-7">
+                  <div class="col-sm-6 flex-ew text-center py-3 border-right mx-0"> <a
+                      class="d-block lead font-weight-bold" *ngIf="usersList">{{usersList.length}}</a> Members </div>
+                  <div class="col-sm-6 flex-ew text-center py-3 mx-0"> <a
+                      class="d-block lead font-weight-bold" *ngIf="lastUser">{{lastUser[0].username}}</a> Newest Member </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ -->
+
+
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row ">
+
+      <!-- Left side -->
+      <div class="col-md-2 border-gray p-3">
+        <a routerLink="/home">Home</a>
+        <hr>
+        <strong>Public</strong>
+
+        <div class="list-group list-group-light">
+          <a class="list-group-item list-group-item-action px-3 border-0" routerLink="/forum">Questions</a>
+          <a class="list-group-item list-group-item-action px-3 border-0" routerLink="/categories">Categories</a>
+          <a class="list-group-item list-group-item-action px-3 border-0" routerLink="/users">Users</a>
+        </div>
+
+        <hr>
+
+        <p>Community</p>
+        <div class="border border-dark p-2">
+          <strong>Join the Community</strong>
+          <p>Start collaborating and sharing with our community.</p>
+          <img class="img-fluid" src="../../assets/community3.svg" alt="">
+          <button class="btn button mt-2 text-light" routerLink="/register">Create a free account</button>
+        </div>
+
+        <hr>
+
+        <div class="bg-white text-sm">
+          <h4 class="px-3 py-4 op-5 m-0 roboto-bold">
+            Stats
+          </h4>
+          <hr class="my-0">
+          <div class="row text-center d-flex flex-row op-7 mx-0">
+            <div class="col-sm-6 flex-ew text-center py-3 border-bottom border-right"> <a
+                class="d-block lead font-weight-bold" *ngIf="categorie">{{categorie.length}}</a> Category </div>
+            <div class="col-sm-6 col flex-ew text-center py-3 border-bottom mx-0"> <a
+                class="d-block lead font-weight-bold" *ngIf="posts">{{posts.length}}</a> Posts </div>
+          </div>
+          <div class="row d-flex flex-row op-7">
+            <div class="col-sm-6 flex-ew text-center py-3 border-right mx-0"> <a
+                class="d-block lead font-weight-bold" *ngIf="usersList">{{usersList.length}}</a> Members </div>
+            <div class="col-sm-6 flex-ew text-center py-3 mx-0"> <a
+                class="d-block lead font-weight-bold" *ngIf="lastUser">{{lastUser[0].username}}</a> Newest Member </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+
+      </div>
+      <div class="col-md-8 p-3">
+        <div class="d-flex justify-content-between">
+          <h3>All Questions</h3>
+          <button class="btn btn-primary" routerLink="/addPost">Ask Question</button>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <p><span>{{posts.length}}</span> questions</p>
+
+          <div>
+            <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                Newest
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                Unanswered
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-mdb-color="dark">
+                Active
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="cardd border-top-gray d-flex justify-content-center py-3 align-items-baseline"
+          *ngFor="let item of posts">
+          <div class="d-flex flex-column w-25 ms-5 lh-1">
+            <p><span>{{item.miPiace}}</span> Likes</p>
+            <p><span>{{item.risposte.length}}</span> Answers</p>
+            <p><span>0</span> Views</p>
+          </div>
+          <div class="w-75 me-5">
+            <a [routerLink]="['/post/', item.id]">{{item.title}}</a>
+            <p class="text">{{item.descrizione}}</p>
+
+            <div class="d-flex justify-content-between">
+              <p class="badge badge-primary">{{item.categoria}}</p>
+              <div class="d-flex">
+                <a [routerLink]="['/profile/', item.user.id]">{{item.user.username}}</a>
+                <p>, <strong>{{item.risposte.length}}</strong> Asked</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <nav aria-label="..." *ngIf="pageSwitch" class="d-flex justify-content-center">
+          <ul class="pagination pagination-lg">
+            <li class="page-item active" aria-current="page" *ngFor="let item of [].constructor(pageData?.totalPages); let i = index">
+              <span class="page-link me-2" (click)="getPosts(i)">
+                {{i + 1}}
+                <span class="visually-hidden">(current)</span>
+              </span>
+            </li>
+          </ul>
+        </nav>
+
+
+
+      </div>
+
+      <!-- right side -->
+
+      <div class="col-md-2 border-start-gray p-3">
+        <div>
+          <strong>Top 3 questions</strong>
+
+          <div class="card mb-3" *ngFor="let item of top3">
+            <a class="card-header" [routerLink]="['/post/', item.id]">{{item.title}}</a>
+            <p class="cart-item">{{item.descrizione}}</p>
+          </div>
+
+        </div>
+        <hr>
+
+        <div>
+          <strong>Categories</strong>
+          <li class="list-group-item border-0 "><a [routerLink]="['/forum']" (click)="getPosts(0)" class="itemc"> ALL CATEGORIES </a></li>
+          <ul class="list-group lista" *ngFor="let item of categorie">
+            <li class="list-group-item border-0"><a [routerLink]="['/forum/', item]" (click)="getPostCategory(item)">{{item}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
