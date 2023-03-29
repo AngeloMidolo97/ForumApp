@@ -44,6 +44,26 @@ export class ForumComponent implements OnInit {
     })
   }
 
+  getPostsByTitle(page: number) {
+    this.authSrv.getPostByTitle(page).subscribe(data => {
+      this.posts = data.content
+      console.log(this.posts);
+      this.pageData = data;
+      console.log(data);
+      this.pageSwitch = true;
+    })
+  }
+
+  getPostsByCategoria(page: number) {
+    this.authSrv.getPostByCategoria(page).subscribe(data => {
+      this.posts = data.content
+      console.log(this.posts);
+      this.pageData = data;
+      console.log(data);
+      this.pageSwitch = true;
+    })
+  }
+
   onSubmit(f: NgForm) {
     this.search = f.value.search
     this.authSrv.SearchBar(this.search).subscribe(data => {

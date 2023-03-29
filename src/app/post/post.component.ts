@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AppComponent } from '../app.component';
 import { Post } from '../model/post';
 import { Risposta } from '../model/risposta';
 import { UserInterface } from '../model/user-interface';
@@ -60,9 +58,17 @@ export class PostComponent implements OnInit {
   onSubmit(f: NgForm) {
     const risp = f.value.risposta;
     const title = f.value.title;
-    this.authSrv.rispostaPost({title: title, risposta: risp}, this.id).subscribe(data => {
-      this.risposta = data;
-      this.getRisposta(this.id);
+    this.authSrv.rispostaPost({title: title, risposta: risp}, this.id).subscribe( {
+      next: (data) => {
+        this.risposta = data;
+        this.getRisposta(this.id);
+
+      }, error: (e) => {
+        if(e.status == 401) {
+          this.router.navigate(["/login"])
+          this.authSrv.logOut();
+        }
+      }
     })
   }
 
@@ -82,7 +88,7 @@ export class PostComponent implements OnInit {
   }
 
   checkLogged() {
-    if(this.loggedUser.username == this.post.user.username) {
+    if(this.loggedUser.username == this.post?.user?.username) {
       return true;
     } else {
       return false;

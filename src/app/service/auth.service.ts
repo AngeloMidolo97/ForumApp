@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Subject, tap } from 'rxjs';
 import { Page, Post } from '../model/post';
 import { Risposta } from '../model/risposta';
 import { User } from '../model/user';
@@ -21,7 +21,6 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
   signUp(user: {}) {
     return this.http.post("http://localhost:8081/auth/signup", user);
   }
@@ -29,6 +28,7 @@ export class AuthService {
   login(user: {}) {
     return this.http.post<User>("http://localhost:8081/auth/login", user).pipe(tap(data => {
       this.isLoggedin.next(true);
+      this.username.next(localStorage.getItem("username")!);
     }));
   }
 
@@ -41,6 +41,14 @@ export class AuthService {
 
   getData(page: number) {
     return this.http.get<Page>(`http://localhost:8081/post?page=${page}&size=10`);
+  }
+
+  getPostByTitle(page: number) {
+    return this.http.get<Page>(`http://localhost:8081/post/title?page=${page}&size=10`);
+  }
+
+  getPostByCategoria(page: number) {
+    return this.http.get<Page>(`http://localhost:8081/post/categoria?page=${page}&size=10`);
   }
 
   getMyPost(id: number) {

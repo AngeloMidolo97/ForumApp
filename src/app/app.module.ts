@@ -33,6 +33,7 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LandingComponent } from './landing/landing.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { LandingComponent } from './landing/landing.component';
     CategoriaComponent,
     ChatComponent,
     DashboardComponent,
-    LandingComponent
+    LandingComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { Post } from '../model/post';
 import { AuthService } from '../service/auth.service';
 
@@ -14,17 +15,17 @@ export class AddPostComponent implements OnInit {
 
   /* image!: File; */
 
+
+
   constructor(private authSrv: AuthService,
     private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   onSubmit(f: NgForm) {
-    /* console.log(this.image);
 
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.image, this.image.name); */
 
     const title = f.value.title;
     const descrizione = f.value.descrizione;
