@@ -10,12 +10,13 @@
         name="descrizione" />
       <label mdbLabel class="form-label" for="form1">Descrizione del post</label>
     </mdb-form-control>
-    <mdb-form-control>
+    <!-- <mdb-form-control>
       <input mdbInput type="text" id="form1" class="form-control mt-2" imgUrl ngModel name="imgUrl" />
       <label mdbLabel class="form-label" for="form1">Url Immagine</label>
-    </mdb-form-control>
+    </mdb-form-control> -->
     <div class="form-floating mt-2">
-      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" categoria ngModel name="categoria">
+      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" categoria ngModel
+        name="categoria">
         <option selected>Open this select menu</option>
         <option value="HARDWARE">HARDWARE</option>
         <option value="VIDEOGAME">VIDEOGAME</option>
@@ -26,6 +27,10 @@
       </select>
       <label for="floatingSelect">Categoria</label>
     </div>
+
+    <label class="form-label" for="customFile">Carica le tue immagini</label>
+    <input type="file" class="form-control" name="image" (change)="upload($event)" id="customFile" />
+
     <button class="btn btn-primary mt-2 w-100" type="submit">CREA POST</button>
   </form>
 </div>

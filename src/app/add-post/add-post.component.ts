@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { NgForm } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
-import { Post } from '../model/post';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -13,18 +11,18 @@ import { AuthService } from '../service/auth.service';
 })
 export class AddPostComponent implements OnInit {
 
-  /* image!: File; */
+  path!: string;
 
-
+  url!: string;
 
   constructor(private authSrv: AuthService,
-    private router: Router) { }
+    private router: Router, private af: AngularFireStorage) { }
 
   ngOnInit(): void {
 
   }
 
-  onSubmit(f: NgForm) {
+  /* onSubmit1(f: NgForm) {
 
 
     const title = f.value.title;
@@ -36,12 +34,44 @@ export class AddPostComponent implements OnInit {
       this.authSrv.createPost({ title: title, descrizione: descrizione, imgUrl: imgUrl, categoria: categoria }).subscribe(data => console.log(f.value));
       this.router.navigate(["/forum"]);
     }
-  }
-
-  /* onFileSelected(event: any) {
-    if(event.target.files) {
-      this.image = event.target.files;
-    }
   } */
 
+
+
+  upload($event: any) {
+    this.path = $event.target.files[0]
+  }
+  uploadImage() {
+    console.log(this.path);
+    this.af.upload("/file" + this.path, this.path).then(d => {
+      d.ref.getDownloadURL().then(data => {
+        this.url = data;
+        console.log(this.url);
+      })
+    })
+  }
+
+  onSubmit(f: NgForm) {
+    console.log(this.path);
+    this.af.upload("/file" + this.path, this.path).then(d => {
+      d.ref.getDownloadURL().then(data => {
+        this.url = data;
+        console.log(this.url)
+
+        const title = f.value.title;
+        const descrizione = f.value.descrizione;
+        const categoria = f.value.categoria
+        const img = this.url;
+        this.authSrv.createPost({
+          title: title,
+          descrizione: descrizione,
+          categoria: categoria,
+          imgUrl: img
+        }).subscribe(data => console.log(data));
+        this.router.navigate(['/home'])
+      })
+    }
+
+    )
+  }
 }

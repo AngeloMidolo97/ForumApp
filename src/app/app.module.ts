@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireModule } from '@angular/fire/compat'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
@@ -71,12 +74,24 @@ import { MessagesComponent } from './messages/messages.component';
     MdbValidationModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyBuq6pxaul84p82bwasowXE0900chWeDGA",
+      authDomain: "capstone-93671.firebaseapp.com",
+      projectId: "capstone-93671",
+      storageBucket: "capstone-93671.appspot.com",
+      messagingSenderId: "634632125060",
+      appId: "1:634632125060:web:bc785bd76036c56d5a20d1",
+      measurementId: "G-2762Y9EMSQ"
+    })
+
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi:true
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
