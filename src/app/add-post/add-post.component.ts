@@ -22,20 +22,6 @@ export class AddPostComponent implements OnInit {
 
   }
 
-  /* onSubmit1(f: NgForm) {
-
-
-    const title = f.value.title;
-    const descrizione = f.value.descrizione;
-    const imgUrl = f.value.imgUrl
-    const categoria = f.value.categoria
-
-    if (f.valid) {
-      this.authSrv.createPost({ title: title, descrizione: descrizione, imgUrl: imgUrl, categoria: categoria }).subscribe(data => console.log(f.value));
-      this.router.navigate(["/forum"]);
-    }
-  } */
-
 
 
   upload($event: any) {
@@ -53,25 +39,47 @@ export class AddPostComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     console.log(this.path);
-    this.af.upload("/file" + this.path, this.path).then(d => {
-      d.ref.getDownloadURL().then(data => {
-        this.url = data;
-        console.log(this.url)
+    if (this.path) {
+      this.af.upload("/file" + this.path, this.path).then(d => {
+        d.ref.getDownloadURL().then(data => {
+          this.url = data;
+          console.log(this.url)
 
-        const title = f.value.title;
-        const descrizione = f.value.descrizione;
-        const categoria = f.value.categoria
-        const img = this.url;
-        this.authSrv.createPost({
-          title: title,
-          descrizione: descrizione,
-          categoria: categoria,
-          imgUrl: img
-        }).subscribe(data => console.log(data));
-        this.router.navigate(['/home'])
-      })
+          const title = f.value.title;
+          const descrizione = f.value.descrizione;
+          const categoria = f.value.categoria
+          const img = this.url;
+          this.authSrv.createPost({
+            title: title,
+            descrizione: descrizione,
+            categoria: categoria,
+            imgUrl: img
+          }).subscribe(data => console.log(data));
+          this.router.navigate(['/home'])
+        })
+      }
+
+      )
+    } else {
+      this.af.upload("/file" + this.path, this.path).then(d => {
+        d.ref.getDownloadURL().then(data => {
+          this.url = data;
+          console.log(this.url)
+
+          const title = f.value.title;
+          const descrizione = f.value.descrizione;
+          const categoria = f.value.categoria
+          const img = this.url;
+          this.authSrv.createPost({
+            title: title,
+            descrizione: descrizione,
+            categoria: categoria
+          }).subscribe(data => console.log(data));
+          this.router.navigate(['/home'])
+        })
+      }
+
+      )
     }
-
-    )
   }
 }

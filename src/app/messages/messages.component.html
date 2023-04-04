@@ -9,12 +9,12 @@
 
       <div *ngFor="let item of messages">
         <p *ngIf="loggedUser?.id == item.sender?.id" class="text-end">
-          <span class="badge badge-primary fs-5">
+          <span class="badge badge-primary text-wrap fs-5">
             {{item.sender.username}}: {{item.message}}
           </span>
         </p>
         <p *ngIf="loggedUser?.id != item.sender?.id" class="text-start">
-          <span class="badge badge-secondary fs-5">
+          <span class="badge badge-secondary text-wrap fs-5">
             {{item.sender.username}}: {{item.message}}
           </span>
         </p>
