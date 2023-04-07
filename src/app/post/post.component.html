@@ -96,8 +96,8 @@
           <strong>Top 3 questions</strong>
 
           <div class="card mb-3" *ngFor="let item of top3">
-            <a class="card-header" [routerLink]="['/post/', item.id]" (click)="getPost2(item.id)">{{item?.title}}</a>
-            <p class="cart-item">{{item?.descrizione}}</p>
+            <a class="card-header" [routerLink]="['/post/', item.id]" (click)="getPost2(item.id)"><p class="text">{{item?.title}}</p></a>
+            <p class="cart-item text">{{item?.descrizione}}</p>
           </div>
 
         </div>

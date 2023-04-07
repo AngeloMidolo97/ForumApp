@@ -55,7 +55,7 @@ export class AddPostComponent implements OnInit {
             categoria: categoria,
             imgUrl: img
           }).subscribe(data => console.log(data));
-          this.router.navigate(['/home'])
+          this.router.navigate(['/forum'])
         })
       }
 
@@ -75,7 +75,7 @@ export class AddPostComponent implements OnInit {
             descrizione: descrizione,
             categoria: categoria
           }).subscribe(data => console.log(data));
-          this.router.navigate(['/home'])
+          this.router.navigate(['/forum'])
         })
       }
 

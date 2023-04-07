@@ -15,7 +15,7 @@ import { MessageService } from './service/message.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'JWT-LOGIN';
+  title = 'Forum';
 
   loginStatus$!: Observable<boolean>;
   username$!: Observable<string>;

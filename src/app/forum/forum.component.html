@@ -95,7 +95,7 @@
             <p><span>0</span> Views</p>
           </div>
           <div class="w-75 me-5">
-            <a [routerLink]="['/post/', item.id]">{{item.title}}</a>
+            <a [routerLink]="['/post/', item.id]" ><p class="text">{{item.title}}</p></a>
             <p class="text">{{item.descrizione}}</p>
 
             <div class="d-flex justify-content-between">
@@ -132,8 +132,8 @@
           <strong>Top 3 questions</strong>
 
           <div class="card mb-3" *ngFor="let item of top3">
-            <a class="card-header" [routerLink]="['/post/', item.id]">{{item.title}}</a>
-            <p class="cart-item">{{item.descrizione}}</p>
+            <a class="card-header text" [routerLink]="['/post/', item.id]">{{item.title}}</a>
+            <p class="cart-item text">{{item.descrizione}}</p>
           </div>
 
         </div>
