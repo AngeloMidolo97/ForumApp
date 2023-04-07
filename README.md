@@ -1,27 +1,31 @@
 # JWTLOGIN
+Forum App
+Questa applicazione è un forum dove gli utenti possono registrarsi e fare domande alla community.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+Tecnologie utilizzate
+L'applicazione è stata sviluppata utilizzando il framework Angular per il frontend e il linguaggio Java con il framework Spring per il backend.
 
-## Development server
+Funzionalità
+Le funzionalità principali dell'applicazione sono:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Registrazione utente
+Login utente
+Visualizzazione delle domande degli utenti
+Inserimento di una nuova domanda
+Risposta ad una domanda
+Installazione
+Per eseguire l'applicazione è necessario installare Node.js, Angular CLI e Java 11. Una volta installate queste dipendenze, clonare il repository e seguire i seguenti passi:
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Frontend: https://github.com/AngeloMidolo97/ForumApp
+Aprire una finestra del terminale nella cartella del progetto e digitare il comando cd frontend per spostarsi nella cartella del frontend
+Digitare il comando npm install per installare le dipendenze del progetto
+Digitare il comando ng serve per avviare il server di sviluppo del frontend. L'applicazione sarà disponibile all'indirizzo http://localhost:4200/.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Backend : https://github.com/AngeloMidolo97/Forum-Capstone-Project
+Aprire un'altra finestra del terminale nella cartella del progetto e digitare il comando cd backend per spostarsi nella cartella del backend
+Digitare il comando ./mvnw spring-boot:run per avviare il server di sviluppo del backend. Il server sarà disponibile all'indirizzo http://localhost:8080/.
+Configurazione
+Il backend dell'applicazione utilizza una base di dati MySQL. Per configurare la connessione al database, modificare il file application.properties nella cartella backend/src/main/resources con i propri parametri di connessione.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
